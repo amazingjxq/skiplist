@@ -10,6 +10,8 @@ public:
     //! Default constructor
     Node();
 
+    Node(int node_level);
+
     Node(K key, V value, int node_level);
 
     //! Copy constructor
@@ -38,8 +40,13 @@ template<typename K, typename V>
 class SkipList
 {
 public:
+    typedef Node<K, V> NodeType;
+    typedef std::shared_ptr<NodeType> NodePtr;
+
     //! Default constructor
     SkipList();
+
+    SkipList(int max_level);
 
     //! Copy constructor
     SkipList(const SkipList<K, V> &other);
@@ -58,9 +65,11 @@ public:
 
 public:
     int insert();
+    NodePtr search(K key);
 
 private:
-    std::shared_ptr<Node<K, V> > m_head;
+    NodeType m_head;
     int m_list_level;
+    int m_max_level;
 };
 #endif /* SKIPLIST_H */
