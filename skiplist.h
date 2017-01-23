@@ -10,6 +10,8 @@ public:
     //! Default constructor
     Node();
 
+    Node(K key, V value, int node_level);
+
     //! Copy constructor
     Node(const Node &other);
 
