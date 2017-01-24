@@ -18,7 +18,7 @@ Node<K,V>::Node(K key, V value, int node_level):
 
 template<typename K, typename V>
 SkipList<K, V>::SkipList(int max_level):
-    m_head(max_level),
+    m_head(std::make_shared<SkipList<K, V>::NodeType>(max_level)),
     m_list_level(1),
     m_max_level(max_level)
 {
@@ -31,11 +31,11 @@ int SkipList<K, V>::insert()
 }
 
 template<typename K, typename V>
-typename SkipList<K, V>::NodePtr SkipList<K, V>::search(K key)
+typename SkipList<K, V>::NodePtrType SkipList<K, V>::search(K key)
 {
-    SkipList<K, V>::NodePtr x = m_head;
+    SkipList<K, V>::NodePtrType x = m_head;
 
-    for (int i = m_list_level; i >= 1; --i)
+    for (int i = m_list_level; i > 0; --i)
     {
 
     }

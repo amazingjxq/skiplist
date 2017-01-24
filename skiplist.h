@@ -3,7 +3,7 @@
 #include <vector>
 #include <memory>
 
-template<typename K, typename V>
+template<class K, class V>
 class Node
 {
 public:
@@ -36,15 +36,12 @@ private:
     int m_node_level;
 };
 
-template<typename K, typename V>
+template<class K, class V>
 class SkipList
 {
 public:
     typedef Node<K, V> NodeType;
-    typedef std::shared_ptr<NodeType> NodePtr;
-
-    //! Default constructor
-    SkipList();
+    typedef std::shared_ptr<NodeType> NodePtrType;
 
     SkipList(int max_level);
 
@@ -65,11 +62,16 @@ public:
 
 public:
     int insert();
-    NodePtr search(K key);
+    NodePtrType search(K key);
 
 private:
-    NodeType m_head;
+    // head dummy node ptr
+    NodePtrType m_head;
+
+    // current level
     int m_list_level;
-    int m_max_level;
+
+    // max level
+    const int m_max_level;
 };
 #endif /* SKIPLIST_H */
